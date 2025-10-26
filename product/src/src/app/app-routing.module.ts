@@ -9,7 +9,7 @@ import { ProductOrderComponent } from './product-order/product-order.component';
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {path:'',component:MainBodyComponent}, 
   {path:'cart',component:ShoppingCartComponent}, 
   {path:'product',component:ProductCategoryComponent}, 
