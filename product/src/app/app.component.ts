@@ -1,4 +1,3 @@
-// In src/src/app/app.component.ts
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router'; // <-- Import RouterModule
 import { HeaderComponent } from './header/header.component'; // <-- Import HeaderComponent
