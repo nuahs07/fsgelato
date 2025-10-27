@@ -1,7 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { CartService, CartItem } from '../cart.service';
+import { CartService, CartItem } from '../service/cart.service';
 // Import ReactiveFormsModule for building forms
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http'; // For submitting order

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CartItem } from '../models/cart-item.model'; // Make sure this path is correct
+import { CartItem } from '../model/cart-item.model'; // Make sure this path is correct
 
 @Injectable({
   providedIn: 'root'

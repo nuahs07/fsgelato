@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common'; // Import CurrencyPipe
 import { HttpClient } from '@angular/common/http';
-import { CartService, CartItem } from '../cart.service'; // Assuming CartService exists
-import { GelatoFlavor } from '../models/gelato-flavor.model'; // Define interface in a separate file
+import { CartService, CartItem } from '../service/cart.service'; // Assuming CartService exists
+import { GelatoFlavor } from '../model/gelato-flavor.model'; // Define interface in a separate file
 
 // Define available filter options
 type FlavorFilter = 'All' | 'Dairy-Free' | 'Seasonal' | 'Sorbet'; // Extend as needed
@@ -11,10 +11,10 @@ type FlavorFilter = 'All' | 'Dairy-Free' | 'Seasonal' | 'Sorbet'; // Extend as n
   selector: 'app-product-catalog',
   standalone: true,
   imports: [CommonModule, CurrencyPipe], // Add CurrencyPipe
-  templateUrl: './product-catalog.component.html',
-  styleUrls: ['./product-catalog.component.css']
+  templateUrl: './product-category.component.html',
+  styleUrls: ['./product-category.component.css']
 })
-export class ProductCatalogComponent implements OnInit {
+export class ProductCategoryComponent implements OnInit {
   allFlavors: GelatoFlavor[] = [];
   filteredFlavors: GelatoFlavor[] = [];
   activeFilter: FlavorFilter = 'All';
