@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common'; // Import CurrencyPipe
 import { HttpClient } from '@angular/common/http';
-import { CartService, CartItem } from '../service/cart.service'; // Assuming CartService exists
+import { CartService } from '../service/cart.service';
+import { CartItem } from '../model/cart-item.model'; // Import CartItem from its own file
 import { GelatoFlavor } from '../model/gelato-flavor.model'; // Define interface in a separate file
 
 // Define available filter options
