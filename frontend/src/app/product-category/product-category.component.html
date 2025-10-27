@@ -1,33 +1,33 @@
-<div class="container-fluid hero-contact p-0 m-0">
-  <h2>eCommerce</h2>
-      <div *ngFor="let category of this.productsCategory" class="col-md-4 newspaper">
-          <div>{{category.categoryName}}</div>
-            <div  class="box" *ngFor="let prod of category.products" >
-                <img class="productimg" src="../assets/products/{{prod.imageFile}}.jpg"/>
-                <p class="productname">{{prod.name}}</p>
-                <p class="productcategory">{{prod.description}}</p>
-                <p class="productcategory">{{prod.categoryName}}</p>
-                <p class="productcategory">{{prod.unitOfMeasure}}</p>
-                <p class="productcategory">{{prod.price}}</p>
-                <img  routerLink="/cart" class="cart" src="../assets/icons/shoppingcart.svg" />
-            </div>
+<div class="catalog-container grid-container">
+  <h2>Our Gelato Flavors</h2>
+
+  <div class="filters text-center">
+    <button class="btn btn-secondary" (click)="setFilter('All')" [class.active]="activeFilter === 'All'">All Flavors</button>
+    <button class="btn btn-secondary" (click)="setFilter('Dairy-Free')" [class.active]="activeFilter === 'Dairy-Free'">Dairy-Free</button>
+    <button class="btn btn-secondary" (click)="setFilter('Seasonal')" [class.active]="activeFilter === 'Seasonal'">Seasonal Specials</button>
+    <button class="btn btn-secondary" (click)="setFilter('Sorbet')" [class.active]="activeFilter === 'Sorbet'">Sorbets</button>
+    </div>
+
+  <div *ngIf="isLoading" class="text-center">Loading flavors...</div>
+
+  <div *ngIf="error" class="alert alert-danger text-center">{{ error }}</div>
+
+  <div *ngIf="!isLoading && !error" class="product-grid">
+    <div *ngFor="let flavor of filteredFlavors" class="card product-card">
+      <img [src]="flavor.imageUrl || 'assets/images/placeholder-gelato.png'" [alt]="flavor.name">
+      <h3>{{ flavor.name }}</h3>
+      <p class="description">{{ flavor.description }}</p>
+      <div class="tags">
+        <span *ngIf="flavor.isSeasonal" class="tag seasonal">Seasonal</span>
+        <span *ngIf="flavor.isDairyFree" class="tag dairy-free">Dairy-Free</span>
+         <span *ngIf="flavor.category" class="tag category">{{ flavor.category }}</span>
       </div>
+      <p class="price">{{ flavor.price | currency:'PHP':'symbol':'1.2-2' }}</p>
+      <button class="btn btn-primary add-to-cart-btn" (click)="addToCart(flavor)">Add to Cart</button>
+    </div>
+  </div>
+
+  <div *ngIf="!isLoading && !error && filteredFlavors.length === 0" class="text-center">
+      <p>No flavors match your selection. Try a different filter!</p>
+  </div>
 </div>
-<!--    <table class="table">
-      <div *ngFor="let category of this.productsCategory" class="col-md-4">
-        <tr >
-          <h2>{{category.categoryName}}</h2>
-        </tr >
-        <tr >
-            <td *ngFor="let prod of this.category.products" class="col-md-4">
-            <img class="productimg" src="../assets/products/{{prod.imageFile}}.jpg"/>
-            <p class="productname">{{prod.name}}</p>
-            <p class="productcategory">{{prod.description}}</p> 
-            <p class="productcategory">{{prod.categoryName}}</p> 
-            <p class="productcategory">{{prod.unitOfMeasure}}</p> 
-            <p class="productcategory">{{prod.price}}</p>        
-            <img  routerLink="/cart" class="cart" src="../assets/icons/shoppingcart.svg" />
-          </td>
-        </tr>
-      </div>
-    </table>-->

@@ -1,49 +1,134 @@
-/* palettes inspired by gelato flavors */
+/* Gelato Theme for Frost & Swirl */
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto:wght@400;700&display=swap'); /* Example fonts: Pacifico for headings, Roboto for body */
+
 :root {
-  --primary-color: #f4a261; /* Mango Sorbet Orange */
-  --secondary-color: #e76f51; /* Strawberry Gelato Red */
-  --accent-color: #2a9d8f; /* Mint Chip Green */
-  --background-color: #fff8f0; /* Vanilla Cream */
-  --text-color: #333;
-  --button-hover: #e09050;
+  /* Core Palette */
+  --palette-strawberry: #e76f51; /* Primary Action */
+  --palette-mango: #f4a261;      /* Secondary Accent */
+  --palette-pistachio: #a7c957;  /* Accent 2 */
+  --palette-mint: #2a9d8f;       /* Accent 3 */
+  --palette-vanilla: #fff8f0;    /* Background */
+  --palette-chocolate: #6d4c41; /* Dark Text/Accents */
+  --palette-cream: #ffffff;      /* Card Backgrounds, Light Text */
+
+  /* Semantic Colors */
+  --primary-color: var(--palette-strawberry);
+  --secondary-color: var(--palette-mango);
+  --accent-color: var(--palette-pistachio);
+  --background-color: var(--palette-vanilla);
+  --text-color: var(--palette-chocolate);
+  --text-color-light: var(--palette-cream);
+  --card-background: var(--palette-cream);
+  --button-hover: #d35f41; /* Darker strawberry */
+  --border-radius-soft: 15px; /* Softer, scoop-like curves */
+  --border-radius-pill: 50px; /* For buttons */
+  --box-shadow-soft: 0 4px 12px rgba(109, 76, 65, 0.15); /* Soft chocolate shadow */
+
+  /* Fonts */
+  --font-heading: 'Pacifico', cursive;
+  --font-body: 'Roboto', sans-serif;
 }
 
 body {
-  font-family: 'Arial', sans-serif; /* Choose a suitable font */
+  font-family: var(--font-body);
   background-color: var(--background-color);
   color: var(--text-color);
   margin: 0;
+  padding: 0;
+  line-height: 1.6;
 }
 
-/* Example button styling */
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  text-align: center;
+}
+
+/* Button Styling */
+.btn {
+  padding: 10px 25px;
+  border: none;
+  border-radius: var(--border-radius-pill);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+  font-family: var(--font-body);
+  display: inline-block; /* Ensure buttons behave predictably */
+}
+
 .btn-primary {
   background-color: var(--primary-color);
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 25px; /* Rounded corners like scoops */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  color: var(--text-color-light);
 }
 
 .btn-primary:hover {
   background-color: var(--button-hover);
+  transform: translateY(-2px); /* Slight lift on hover */
 }
 
-/* Card styling for products - could have wavy borders or scoop-like shapes */
-.product-card {
-  background-color: white;
-  border-radius: 15px;
-  padding: 15px;
-  margin: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+.btn-secondary {
+   background-color: transparent;
+   color: var(--secondary-color);
+   border: 2px solid var(--secondary-color);
+}
+
+.btn-secondary:hover {
+   background-color: var(--secondary-color);
+   color: var(--text-color-light);
+   transform: translateY(-2px);
+}
+
+/* Card Styling */
+.card {
+  background-color: var(--card-background);
+  border-radius: var(--border-radius-soft);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--box-shadow-soft);
+  overflow: hidden; /* Prevent content spill */
+  border-top: 6px solid var(--accent-color); /* Themed accent */
+}
+
+/* Form Styling */
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px;
+  box-sizing: border-box; /* Include padding in width */
+  background-color: #fff; /* Ensure inputs are white */
+}
+
+/* Basic Grid for Layout */
+.grid-container {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Responsive Product Grid Example */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+/* Utility Class */
+.text-center {
   text-align: center;
-  border-top: 5px solid var(--accent-color); /* Themed top border */
-}
-
-.product-card img {
-  max-width: 100%;
-  height: 150px; /* Fixed height for consistency */
-  object-fit: cover;
-  border-radius: 10px;
 }

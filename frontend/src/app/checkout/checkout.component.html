@@ -1,0 +1,120 @@
+<div class="checkout-container grid-container">
+  <h2>Checkout</h2>
+
+  <div class="card summary-card">
+    <h3>Order Summary</h3>
+    <ul class="summary-list">
+      <li *ngFor="let item of cartItems">
+        <span class="item-name">{{ item.name }}</span>
+        <span class="item-qty">x {{ item.quantity }}</span>
+        <span class="item-price">{{ item.price * item.quantity | currency:'PHP':'symbol':'1.2-2' }}</span>
+      </li>
+    </ul>
+    <hr>
+    <p class="total">
+      <strong>Total:</strong>
+      <span>{{ orderTotal | currency:'PHP':'symbol':'1.2-2' }}</span>
+    </p>
+  </div>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()" class="card checkout-form">
+    <h3>Your Details</h3>
+
+    <div class="form-group">
+      <label for="customerName">Full Name</label>
+      <input type="text" id="customerName" formControlName="customerName">
+      <div *ngIf="customerName?.invalid && (customerName?.dirty || customerName?.touched)" class="validation-error">
+        <small *ngIf="customerName?.errors?.['required']">Name is required.</small>
+        <small *ngIf="customerName?.errors?.['minlength']">Name must be at least 2 characters.</small>
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="customerEmail">Email Address</label>
+      <input type="email" id="customerEmail" formControlName="customerEmail">
+       <div *ngIf="customerEmail?.invalid && (customerEmail?.dirty || customerEmail?.touched)" class="validation-error">
+        <small *ngIf="customerEmail?.errors?.['required']">Email is required.</small>
+        <small *ngIf="customerEmail?.errors?.['email']">Please enter a valid email.</small>
+      </div>
+    </div>
+     <div class="form-group">
+      <label for="customerPhone">Phone Number (e.g., 09xxxxxxxxx)</label>
+      <input type="text" id="customerPhone" formControlName="customerPhone">
+       <div *ngIf="customerPhone?.invalid && (customerPhone?.dirty || customerPhone?.touched)" class="validation-error">
+        <small *ngIf="customerPhone?.errors?.['required']">Phone number is required.</small>
+        <small *ngIf="customerPhone?.errors?.['pattern']">Please enter a valid PH mobile number (09...).</small>
+      </div>
+    </div>
+
+    <hr>
+
+    <h3>Delivery Option</h3>
+    <div class="delivery-options">
+      <button type="button" class="btn" (click)="selectDeliveryOption('delivery')" [class.active]="deliveryOption === 'delivery'">
+        Deliver to Address
+      </button>
+      <button type="button" class="btn" (click)="selectDeliveryOption('pickup')" [class.active]="deliveryOption === 'pickup'">
+        Pick up In-Store
+      </button>
+    </div>
+
+    <div *ngIf="deliveryOption === 'delivery'">
+       <h4>Delivery Address</h4>
+       <div class="form-group">
+        <label for="deliveryAddress">Street Address</label>
+        <input type="text" id="deliveryAddress" formControlName="deliveryAddress">
+         <div *ngIf="deliveryAddress?.invalid && (deliveryAddress?.dirty || deliveryAddress?.touched)" class="validation-error">
+          <small *ngIf="deliveryAddress?.errors?.['required']">Address is required for delivery.</small>
+           <small *ngIf="deliveryAddress?.errors?.['minlength']">Address seems too short.</small>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="deliveryCity">City</label>
+        <input type="text" id="deliveryCity" formControlName="deliveryCity">
+         <div *ngIf="deliveryCity?.invalid && (deliveryCity?.dirty || deliveryCity?.touched)" class="validation-error">
+           <small *ngIf="deliveryCity?.errors?.['required']">City is required for delivery.</small>
+        </div>
+      </div>
+       <div class="form-group">
+        <label for="deliveryNotes">Delivery Notes (Optional)</label>
+        <textarea id="deliveryNotes" formControlName="deliveryNotes" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div *ngIf="deliveryOption === 'pickup'">
+       <h4>Pickup Details</h4>
+       <div class="form-group">
+         <label for="pickupTime">Preferred Pickup Time</label>
+         <select id="pickupTime" formControlName="pickupTime">
+            <option value="">-- Select Time --</option>
+            <option value="12:00 PM">12:00 PM - 1:00 PM</option>
+            <option value="1:00 PM">1:00 PM - 2:00 PM</option>
+            </select>
+          <div *ngIf="pickupTime?.invalid && (pickupTime?.dirty || pickupTime?.touched)" class="validation-error">
+           <small *ngIf="pickupTime?.errors?.['required']">Please select a pickup time.</small>
+        </div>
+       </div>
+       <p>Pickup Location: Frost & Swirl Gelato, Main Branch (Address Here)</p>
+     </div>
+
+    <hr>
+
+    <h3>Payment Method</h3>
+     <div class="payment-options">
+       <button type="button" class="btn btn-secondary" (click)="selectPaymentMethod('paypal')" [class.active]="paymentMethod==='paypal'">PayPal</button>
+       <button type="button" class="btn btn-secondary" (click)="selectPaymentMethod('stripe')" [class.active]="paymentMethod==='stripe'">Credit Card</button>
+       <button type="button" class="btn btn-secondary" (click)="selectPaymentMethod('gcash')" [class.active]="paymentMethod==='gcash'">GCash / PayMaya</button>
+     </div>
+     <div id="payment-element-placeholder" *ngIf="paymentMethod === 'stripe' || paymentMethod === 'paypal'">
+        </div>
+
+
+    <hr>
+
+    <div *ngIf="submitError" class="alert alert-danger">{{ submitError }}</div>
+    <div *ngIf="submitSuccess" class="alert alert-success">Order placed successfully! Thank you!</div>
+
+    <button type="submit" class="btn btn-primary btn-place-order" [disabled]="isSubmitting || checkoutForm.invalid || !paymentMethod">
+      {{ isSubmitting ? 'Placing Order...' : 'Place Order Now' }}
+    </button>
+  </form>
+</div>

@@ -1,146 +1,98 @@
-import { Component, OnInit } from '@angular/core';
-import { Product } from '../model/product';
-import { ProductCategory } from '../model/product-category';
-import { ProductService } from '../service/product.service';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule, CurrencyPipe } from '@angular/common'; // Import CurrencyPipe
+import { HttpClient } from '@angular/common/http';
+import { CartService, CartItem } from '../cart.service'; // Assuming CartService exists
+import { GelatoFlavor } from '../models/gelato-flavor.model'; // Define interface in a separate file
 
+// Define available filter options
+type FlavorFilter = 'All' | 'Dairy-Free' | 'Seasonal' | 'Sorbet'; // Extend as needed
 
 @Component({
-  selector: 'app-product-category',
+  selector: 'app-product-catalog',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './product-category.component.html',
-  styleUrls: ['./product-category.component.css']
+  imports: [CommonModule, CurrencyPipe], // Add CurrencyPipe
+  templateUrl: './product-catalog.component.html',
+  styleUrls: ['./product-catalog.component.css']
 })
+export class ProductCatalogComponent implements OnInit {
+  allFlavors: GelatoFlavor[] = [];
+  filteredFlavors: GelatoFlavor[] = [];
+  activeFilter: FlavorFilter = 'All';
+  isLoading = true;
+  error: string | null = null;
 
-export class ProductCategoryComponent implements OnInit  {
-      public productsCategory: ProductCategory[]  = [];
- 
-        constructor(private productService: ProductService) {
-      
-/*        this.productsCategory =  
-        [
-          {
-            "categoryName": "Snacks",
-            "products":   
-            [             
-              {
-                "id": 1,
-                "name": "Alaska",
-                "description" : "This is a description of Alaska",
-                "categoryName":  "Snack",
-                "unitOfMeasure": "can",
-                "imageFile": "Alaska",
-                "price": "30.00"
-              },
-              {
-                "id": 2,
-                "name": "Cardbury",
-                "description" : "This is a description of Cardbury",
-                "categoryName":  "Snacks",
-                "unitOfMeasure": "ounce",
-                "imageFile": "cardbury",
-                "price": "10.00"
-              },
-              {
-                "id": 3,
-                "name": "Milo",
-                "description" : "This is a description of Milo",
-                "unitOfMeasure": "can",
-                "categoryName":  "Snacks",
-                "imageFile": "milo",
-                "price": "120.00"
-              }
-            ]
-          },
-          {
-            "categoryName": "Audio",
-            "products":   
-            [             
-              {
-                "id":4,
-                "name": "denonreceiver",
-                "description" : "This is a description of Denon receiver",
-                "unitOfMeasure": "piece",
-                "imageFile": "denonreceiver",
-                "categoryName":  "Audio",
-                "price": "1420.00"
-              },
-              {
-                "id": 5,
-                "name": "Mango",
-                "description" : "This is a description of Mango",
-                "unitOfMeasure": "piece",
-                "imageFile": "mango",
-                "categoryName":  "Audio",
-                "price": "0.00"
-              },
-              {
-                "id": 6,
-                "name": "soundar",
-                "description" : "This is a description of the Sound bar",
-                "unitOfMeasure": "piece",
-                "imageFile": "soundbar",
-                "categoryName":  "Audio",          
-                "price": "30.00"
-              },
-              {
-                "id": 6,
-                "name": "soundar2",
-                "description" : "This is a description of another soundbar",
-                "categoryName":  "AUdio",
-                "imageFile": "soundar2",
-                "unitOfMeasure": "piece",
-                "price": "350.00"
-              }
-            ]
-          },
-          {
-            "categoryName": "Dessert",
-            "products":   
-            [             
-              {
-                "id":4,
-                "name": "banana",
-                "description" : "This is a description of banana",
-                "categoryName":  "Audio",
-                "imageFile": "banana",
-                "unitOfMeasure": "kilo",
-                "price": "20.00"
-              },
-              {
-                "id": 5,
-                "name": "Banana Split",
-                "description" : "This is a description of banana split ice cream",
-                "categoryName":  "Audio",
-                "imageFile": "bananasplit",
-                "unitOfMeasure": "serving",
-                "price": "220.00"
-              },
-              {
-                "id": 6,
-                "name": "Leo Milka",
-                "description" : "This is a description of Leo Milka",
-                "categoryName":  "Audio",
-                "imageFile": "leomilka",
-                "unitOfMeasure": "grams",
-                "price": "620.00"
-              },
-              {
-                "id": 6,
-                "name": "Strawberry",
-                "description" : "This is a description of Strawberry",
-                "categoryName":  "AUdio",
-                "imageFile": "strawberry",
-                "unitOfMeasure": "grams",
-                "price": "10.00"
-              }
-            ]
-          }
-        ]; */
+  private http = inject(HttpClient);
+  private cartService = inject(CartService);
+  // Use environment variable for API URL
+  private apiUrl = 'http://localhost:8080/api/flavors'; // Replace with env var
+
+  ngOnInit(): void {
+    this.fetchFlavors();
+  }
+
+  fetchFlavors(): void {
+    this.isLoading = true;
+    this.error = null;
+    this.http.get<GelatoFlavor[]>(this.apiUrl).subscribe({
+      next: (data) => {
+        this.allFlavors = data;
+        this.applyFilter(); // Apply default 'All' filter
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching flavors:', err);
+        this.error = 'Could not load flavors. Please try again later.';
+        this.isLoading = false;
       }
-    ngOnInit(): void {
-      console.log("ngOnInit called");
-      this.productService.getData().subscribe(data => {this.productsCategory = data; });
+    });
+  }
+
+  applyFilter(): void {
+    switch (this.activeFilter) {
+      case 'Dairy-Free':
+        this.filteredFlavors = this.allFlavors.filter(f => f.isDairyFree);
+        break;
+      case 'Seasonal':
+        this.filteredFlavors = this.allFlavors.filter(f => f.isSeasonal);
+        break;
+      case 'Sorbet': // Example: Assuming category field exists
+        this.filteredFlavors = this.allFlavors.filter(f => f.category?.toLowerCase() === 'sorbet');
+        break;
+      case 'All':
+      default:
+        this.filteredFlavors = this.allFlavors;
+        break;
     }
   }
+
+  setFilter(filter: FlavorFilter): void {
+    this.activeFilter = filter;
+    this.applyFilter();
+  }
+
+  addToCart(flavor: GelatoFlavor): void {
+    // Convert GelatoFlavor to the format expected by CartService
+    const itemToAdd = {
+      id: flavor.id,
+      name: flavor.name,
+      price: flavor.price,
+      imageUrl: flavor.imageUrl
+    };
+    this.cartService.addItem(itemToAdd);
+    // Optional: Add user feedback (e.g., toast message)
+    console.log(`${flavor.name} added to cart.`);
+  }
+}
+
+// Define GelatoFlavor interface (e.g., in src/app/models/gelato-flavor.model.ts)
+// export interface GelatoFlavor {
+//   id: number;
+//   name: string;
+//   description: string;
+//   price: number;
+//   imageUrl: string;
+//   category?: string; // e.g., 'Dairy', 'Sorbet'
+//   isSeasonal: boolean;
+//   isDairyFree: boolean;
+//   // Add other relevant fields like allergens, ingredients if needed
+// }

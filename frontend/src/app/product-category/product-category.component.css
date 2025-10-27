@@ -1,198 +1,87 @@
-
-#main {
-    height: 200px;
-    display: flex;
-    align-items: baseline;
+.catalog-container {
+  max-width: 1200px;
+  margin: 20px auto;
 }
 
-/* External CSS file (styles.css) */
-box {
-border: 1px solid black;
-padding: 20px;
-width: 300px;
+.filters {
+  margin-bottom: 30px;
+  display: flex; /* Arrange buttons */
+  justify-content: center; /* Center buttons */
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  gap: 10px; /* Space between buttons */
 }
 
-#main div {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    max-width:200px;
-  }
-  
-  .newspaper {
-    column-count: 3;
-    column-gap: 40px;
-    column-rule-style: solid;
-    column-rule-width: 1px;
-  }
+.filters .btn { /* Style buttons specifically */
+  min-width: 120px; /* Ensure buttons have some width */
+}
 
-.productname{
-    color: hsl(196, 35%, 94%);
-    background-color: rgba(226, 35, 210, 0.281);
-    font-size: x-large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 250px;
-  }
-  .cart{
-    width: 50px;
-    height: 50px;
-    color: hsl(196, 35%, 94%);
-    font-size: x-large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-  }
-  .table{
-    color: hsl(196, 35%, 94%);
-    padding: 10em;
-    background-color: rgba(52, 29, 185, 0.507);
-  }
-  .productcategory{
-    color: hsl(196, 35%, 94%);
-    background-color: rgba(56, 17, 46, 0.055);
-  }
-  
-  * {
-      overflow: hidden;
-    }
-    #map {
-      height: 50%;
-    }
-    #fileName{
-      border:none;
-      background: none;
-      overflow: hidden;
-    }
-    .text-file{
-      color:#00A6DA;
-      font-weight: 500;
-    }
-    .file-container{
-      border: 1px solid #00A6DA;
-      border-radius: 8px;
-      padding:6px 12px;
-      display:flex;
-      align-items:center;
-      justify-content: center;
-      p{
-        flex:1;
-      }
-    }
-    .upload-label {
-    
-      background-color: white;
-      text-align: center;
-      font-weight: bold;
-      color: #00a6da;
-      border: 1px solid #00a6da;
-      cursor: pointer;
-    }
-    .note-form {
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      background-color: #f4fdff;
-      border: 1px solid #00a6da;
-      border-radius: 4px;
-    }
-    .upload-label:focus {
-      outline: none;
-      box-shadow: none;
-    }
-    
-    .product {
-      background-color: rgba(153, 125, 135, 0.651);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      height: 100px;
-    }
-    
-    .productcell {
-      height: 50px;
-      width: 50px;
-      background-color: rgb(138, 22, 118); 
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-    }
-  
-    p
-  
-    .hero-contact {
-      background-image: url("../../assets/scenery/AA1hEW1S.jpg");
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 100% 100%;
-      height: 1660px;
-    
-      .container {
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        height: 100%;
-      }
-    }
-    input[type="date"]::-webkit-calendar-picker-indicator{
-      background: url("../../assets/scenery/AA1hEW1S.jpg") no-repeat;
-      background-size: 1em 1em;
-      background-repeat: no-repeat;
-      margin-top: 4px;
-    }
-    .btn-primary {
-      background-color: #003896 !important;
-      border-color: #003896 !important;
-    }
-    .btn-secondary {
-      background-color: #515151 !important;
-      border-color: #515151 !important;
-    }
-    textarea {
-      resize: none;
-    }
-    .left {
-      .form-container {
-        width: 50%;
-      }
-    }
-    .right {
-      p {
-        span {
-          .text-secondary {
-            color: #00a6da;
-          }
-        }
-      }
-    }
-    
-    .type-dropdown {
-      padding-right: calc(var(--bs-gutter-x) * 0.6);
-      padding-left: calc(var(--bs-gutter-x) * -0.5);
-    }
-    
-    
-    
-    @media only screen and (max-width: 991px) and (min-width:575px) {
-      .hero-contact {
-        height: 150px;
-      }
-      .left {
-        .form-container {
-          width: 100%;
-        }
-      }
-    }
-    @media only screen and (max-width: 576px) {
-      .hero-contact {
-        height: 100px;
-      }
-      .left {
-        .form-container {
-          width: 100%;
-        }
-      }
-    }
-    
+.filters .btn.active {
+  background-color: var(--primary-color);
+  color: var(--text-color-light);
+  border-color: var(--primary-color);
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Push button to bottom */
+  text-align: center;
+}
+
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover; /* Crop images nicely */
+  border-radius: var(--border-radius-soft) var(--border-radius-soft) 0 0; /* Rounded top corners */
+  margin-bottom: 15px;
+}
+
+.product-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.4em;
+  color: var(--text-color); /* Use standard text color for flavor name */
+}
+
+.product-card .description {
+  font-size: 0.9em;
+  color: #666; /* Lighter color for description */
+  flex-grow: 1; /* Allow description to take up space */
+  margin-bottom: 15px;
+}
+
+.product-card .tags {
+  margin-bottom: 10px;
+}
+
+.product-card .tag {
+  display: inline-block;
+  background-color: #eee;
+  color: #555;
+  padding: 3px 8px;
+  border-radius: var(--border-radius-pill);
+  font-size: 0.75em;
+  margin: 2px;
+}
+.product-card .tag.seasonal { background-color: var(--palette-mango); color: white; }
+.product-card .tag.dairy-free { background-color: var(--palette-mint); color: white; }
+.product-card .tag.category { background-color: var(--palette-pistachio); color: white; }
+
+
+.product-card .price {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin-bottom: 15px;
+}
+
+.add-to-cart-btn {
+  width: 100%; /* Make button full width of card padding */
+}
+
+.alert-danger {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  padding: 15px;
+  border-radius: 8px;
+}

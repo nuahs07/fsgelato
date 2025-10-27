@@ -1,0 +1,77 @@
+.checkout-container {
+  max-width: 800px;
+  margin: 20px auto;
+}
+
+.summary-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.summary-card li {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+.summary-card li:last-child {
+  border-bottom: none;
+}
+.summary-card .item-name { flex-grow: 1; margin-right: 10px; }
+.summary-card .item-qty { min-width: 50px; text-align: right; margin-right: 10px; }
+.summary-card .item-price { min-width: 80px; text-align: right; font-weight: bold; }
+
+.summary-card .total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.3em;
+  margin-top: 15px;
+  color: var(--primary-color);
+}
+
+.checkout-form hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 25px 0;
+}
+
+.delivery-options .btn,
+.payment-options .btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 2px solid var(--secondary-color);
+  background-color: transparent;
+  color: var(--secondary-color);
+}
+
+.delivery-options .btn.active,
+.payment-options .btn.active {
+  background-color: var(--secondary-color);
+  color: var(--text-color-light);
+}
+
+.validation-error small {
+  color: #dc3545; /* Bootstrap danger color */
+  font-size: 0.8em;
+}
+
+.btn-place-order {
+  width: 100%;
+  padding: 15px;
+  font-size: 1.2em;
+  margin-top: 20px;
+}
+
+.btn-place-order:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
