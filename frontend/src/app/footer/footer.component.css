@@ -1,6 +1,94 @@
-.footer{
-    width:1601px; 
-    height:68px;
-    
-    background-color:rgb(20, 203, 220);
+/* src/app/footer/footer.component.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'); /* Example: Font Awesome for icons */
+
+.main-footer {
+  background-color: var(--palette-chocolate); /* Dark footer */
+  color: #a0a0a0; /* Light grey text */
+  padding: 40px 0 20px 0;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+  justify-content: space-around;
+  max-width: 1100px;
+  margin: 0 auto 20px auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 10px 20px;
+  min-width: 250px; /* Prevent sections from becoming too narrow */
+}
+
+.footer-section h4, .logo-text {
+  color: var(--text-color-light); /* White headings */
+  margin-bottom: 15px;
+  font-family: var(--font-body);
+  font-weight: bold;
+}
+
+.logo-text span {
+  font-family: var(--font-heading);
+  color: var(--palette-strawberry); /* Brand color */
+  font-size: 1.2em;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul a {
+  color: #a0a0a0;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul a:hover {
+  color: var(--text-color-light);
+}
+
+.contact-info span {
+  display: block; /* Each line on its own */
+  margin-bottom: 8px;
+}
+
+.contact-info i { /* Style icons */
+  margin-right: 10px;
+  color: var(--palette-strawberry);
+}
+
+.socials a {
+  color: #a0a0a0;
+  margin-right: 15px;
+  font-size: 1.3em;
+  transition: color 0.3s ease;
+}
+
+.socials a:hover {
+  color: var(--text-color-light);
+}
+
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 20px;
+  border-top: 1px solid #444; /* Separator line */
+  font-size: 0.9em;
+  color: #666; /* Dimmer text for copyright */
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 }

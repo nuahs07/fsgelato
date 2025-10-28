@@ -1,26 +1,32 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../service/menu.service';
-import { Menu } from '../model/menu';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router'; // Import RouterModule for routerLink
+import { CartService } from '../service/cart.service'; // Correct path
+import { Observable, map } from 'rxjs'; // Import Observable and map operator
 
 @Component({
   selector: 'app-header',
-  standalone: true, // <-- Make sure this is true
-  imports: [
-      CommonModule,
-      RouterModule // <-- Add RouterModule here
-  ],
+  standalone: true,
+  imports: [CommonModule, RouterModule], // Import RouterModule
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent implements OnInit  {
-  public menus: Menu[] = []
+export class HeaderComponent implements OnInit {
+  cartService = inject(CartService);
+  cartItemCount$: Observable<number> | undefined;
 
-  constructor(private menuService: MenuService) {
-  }
+  // Mock menu items for now, replace with MenuService later if needed
+  menus = [
+    { name: 'Home', routerPath: '' },
+    { name: 'Flavors', routerPath: '/product' }, // Link to product catalog
+    // { name: 'About', routerPath: '/about' }, // Add later if needed
+    { name: 'Contact', routerPath: '/contact' }
+  ];
 
   ngOnInit(): void {
-      this.menuService.getData().subscribe(data => {this.menus = data; });
+    // Get the total item count observable from the cart service
+    this.cartItemCount$ = this.cartService.cartItems$.pipe(
+      map(items => items.reduce((count, item) => count + item.quantity, 0))
+    );
   }
 }

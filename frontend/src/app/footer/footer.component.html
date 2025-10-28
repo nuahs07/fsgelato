@@ -1,3 +1,37 @@
-<div class="footer">
-   Footer
-</div>
+<!-- src/app/footer/footer.component.html -->
+<footer class="main-footer">
+  <div class="footer-content">
+    <div class="footer-section about">
+      <h4 class="logo-text"><span>Frost & Swirl</span> Gelato</h4>
+      <p>
+        Handcrafted gelato made with love in Bacoor, Calabarzon. Bringing you scoops of happiness, one order at a time.
+      </p>
+      <!-- Social Icons (Add links later) -->
+      <div class="socials">
+        <a href="#"><i class="fab fa-facebook"></i></a> <!-- Placeholder: Replace with actual icons/links -->
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+
+    <div class="footer-section links">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a routerLink="/product">Flavors</a></li>
+        <li><a routerLink="/about">About Us</a></li> <!-- Placeholder -->
+        <li><a routerLink="/faq">FAQ</a></li> <!-- Placeholder -->
+        <li><a routerLink="/contact">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section contact-info">
+      <h4>Contact Info</h4>
+       <span><i class="fas fa-map-marker-alt"></i> 123 Gelato Lane, Bacoor, Calabarzon, Philippines</span><br> <!-- Placeholder -->
+      <span><i class="fas fa-phone"></i> +63 917 123 4567</span><br> <!-- Placeholder -->
+      <span><i class="fas fa-envelope"></i> orders@frostswirl.ph</span> <!-- Placeholder -->
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; {{ currentYear }} Frost & Swirl Gelato | Designed by Shaun Owen L. Mallari
+  </div>
+</footer>

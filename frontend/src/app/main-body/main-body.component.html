@@ -1,15 +1,41 @@
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
+<!-- src/app/main-body/main-body.component.html -->
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Welcome to Frost & Swirl Gelato!</h1>
+      <p>Experience the creamiest, dreamiest gelato this side of Bacoor.</p>
+      <button class="btn btn-primary" routerLink="/product">Explore Our Flavors</button>
+    </div>
+     <!-- Add a background image via CSS -->
+  </section>
 
-<h1>Create Multiple Columns</h1>
+  <!-- Featured Section (Example) -->
+  <section class="grid-container features">
+    <div class="card feature-card">
+       <img src="assets/images/icon-flavors.png" alt="Gelato Scoop Icon" class="feature-icon">
+      <h3>Handcrafted Flavors</h3>
+      <p>Made daily with the finest local and imported ingredients.</p>
+    </div>
+     <div class="card feature-card">
+       <img src="assets/images/icon-delivery.png" alt="Delivery Scooter Icon" class="feature-icon">
+      <h3>Fast Delivery</h3>
+      <p>Get your favorite gelato delivered right to your doorstep.</p>
+       <button class="btn btn-secondary btn-sm" routerLink="/product">Order Now</button>
+    </div>
+     <div class="card feature-card">
+        <img src="assets/images/icon-seasonal.png" alt="Leaf Icon" class="feature-icon">
+      <h3>Seasonal Specials</h3>
+      <p>Discover unique, limited-time flavors throughout the year.</p>
+       <button class="btn btn-secondary btn-sm" routerLink="/product" [queryParams]="{ filter: 'Seasonal' }">See Specials</button> <!-- Example linking to filtered view -->
+    </div>
+  </section>
 
-<div class="newspaper">
-Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
-<img routerLink="" src="../assets/GMART.png" />Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.
-</div>
+   <!-- Call to Action -->
+   <section class="cta text-center">
+     <h2>Ready for a Treat?</h2>
+     <p>Browse our full menu and find your new favorite flavor.</p>
+     <button class="btn btn-primary btn-large" routerLink="/product">View Full Menu</button>
+   </section>
 
-</body>
-</html>
+</main>

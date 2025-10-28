@@ -1,13 +1,25 @@
-<div class="header">
-    <table>
-        <tr>
-            <td><a ><img routerLink="" src="../assets/GMART.png" /></a>
-    </tr>
-      <tr>
-        <td class="phrase">Where you enjoy the most shopping experience</td>
-                    <td  class="buton1" *ngFor="let menu of this.menus" class="col-md-4"  >
-                <button class="button1" routerLink="/{{menu.routerPath}}"  >{{menu.name}}</button>
-            </td>
-      </tr>
-    </table> 
-</div>
+<!-- src/app/header/header.component.html -->
+<header class="main-header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a routerLink="">
+        <!-- Placeholder Logo -->
+        <img src="assets/images/frost-swirl-logo-placeholder.png" alt="Frost & Swirl Gelato Logo" class="logo">
+        <span class="brand-name">Frost & Swirl Gelato</span>
+      </a>
+    </div>
+    <ul class="navbar-nav">
+      <li *ngFor="let menu of menus" class="nav-item">
+        <a class="nav-link" routerLink="/{{menu.routerPath}}" routerLinkActive="active" [routerLinkActiveOptions]="{exact: menu.routerPath === ''}">
+          {{ menu.name }}
+        </a>
+      </li>
+    </ul>
+    <div class="navbar-cart">
+      <a routerLink="/cart" class="cart-link" aria-label="View Shopping Cart">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cart-icon"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span *ngIf="(cartItemCount$ | async) as count" class="cart-badge">{{ count }}</span>
+      </a>
+    </div>
+  </nav>
+</header>
