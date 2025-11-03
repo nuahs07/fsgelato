@@ -8,6 +8,7 @@ import { CompanyHomeComponent } from './company-home/company-home.component';
 import { ProductOrderComponent } from './product-order/product-order.component';
 import { CustomerServiceComponent } from './customer-service/customer-service.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { OrderConfirmationComponent } from './order-confirmation/order-confirmation.component';
 
 export const routes: Routes = [
   {path:'',component:MainBodyComponent}, 
@@ -16,6 +17,7 @@ export const routes: Routes = [
   {path:'order',component:ProductOrderComponent}, 
   {path:'customer',component:CustomerServiceComponent}, 
   {path:'contact',component:ContactUsComponent}
+  {path: 'confirmation',component: OrderConfirmationComponent}
 ];
 
 @NgModule({
