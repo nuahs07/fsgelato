@@ -2,10 +2,10 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../service/cart.service';
-import { CartItem } from '../model/cart-item.model'; // Import CartItem from its own file
+import { CartItem } from '../model/cart-item.model';
 // Import ReactiveFormsModule for building forms
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { HttpClient } from '@angular/common/http'; // For submitting order
+import { HttpClient } from '@angular/common/http'; // Keep for later, though not used in mock
 
 @Component({
   selector: 'app-checkout',
@@ -49,8 +49,10 @@ export class CheckoutComponent implements OnInit {
     this.orderTotal = this.cartService.getTotalPrice();
 
     if (this.cartItems.length === 0) {
-      this.router.navigate(['/catalog']);
-      return;
+      // Don't navigate if cart is empty, user might just be refreshing
+      // Let the template handle showing an empty cart message
+      // this.router.navigate(['/product']); // Changed from /catalog
+      // return;
     }
 
     // Set conditional validators based on delivery option
@@ -85,7 +87,6 @@ export class CheckoutComponent implements OnInit {
   selectPaymentMethod(method: string): void {
       this.paymentMethod = method;
       console.log('Payment method selected:', method);
-      // In a real app, this might trigger loading Stripe Elements, PayPal button, etc.
   }
 
   onSubmit(): void {
@@ -109,21 +110,42 @@ export class CheckoutComponent implements OnInit {
       totalAmount: this.orderTotal,
       deliveryOption: this.deliveryOption,
       paymentMethod: this.paymentMethod,
-      // Add payment token/details if gathered from Stripe/PayPal on frontend
     };
 
-    console.log('Submitting order:', orderData);
+    console.log('Simulating order submission with:', orderData);
 
-    // Call your backend API
-    this.http.post('/api/orders', orderData) // Replace with your actual API endpoint
+    // --- THIS IS THE FIX ---
+    // We replace the real http.post with a simulated success
+    // to keep the frontend flow working without a backend.
+    
+    // 1. Simulate network delay
+    setTimeout(() => {
+        console.log('Order simulation successful!');
+        
+        // 2. Set success flags
+        this.isSubmitting = false;
+        this.submitSuccess = true;
+        
+        // 3. Clear the cart (from CartService)
+        this.cartService.clearCart();
+        
+        // 4. Reset the form
+        this.checkoutForm.reset();
+        
+        // 5. Navigate to the confirmation page
+        this.router.navigate(['/order-confirmation']);
+
+    }, 1500); // Simulate a 1.5 second delay
+
+    /* // This is the backend code we will use LATER:
+    this.http.post('/api/orders', orderData)
       .subscribe({
           next: (response) => {
               console.log('Order successful:', response);
               this.isSubmitting = false;
               this.submitSuccess = true;
               this.cartService.clearCart();
-              // Optional: Redirect to a confirmation page after a delay
-              // setTimeout(() => this.router.navigate(['/order-confirmation']), 3000);
+              this.router.navigate(['/order-confirmation']);
           },
           error: (err) => {
               console.error('Order failed:', err);
@@ -131,8 +153,8 @@ export class CheckoutComponent implements OnInit {
               this.submitError = 'Could not place order. Please check your details or try again later.';
           }
       });
-
-    // TODO: Implement actual payment gateway logic here
+    */
+   // TODO: Implement actual payment gateway logic here
     // This often involves:
     // 1. Getting a payment token from Stripe/PayPal on the frontend.
     // 2. Sending the token + orderData to the backend.

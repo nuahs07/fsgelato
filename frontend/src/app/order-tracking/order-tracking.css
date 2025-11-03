@@ -1,0 +1,121 @@
+.tracking-container {
+  max-width: 700px;
+  margin: 30px auto;
+}
+
+.subtitle {
+  margin-bottom: 30px;
+  font-size: 1.1em;
+  color: #555;
+}
+
+.tracking-form {
+  display: flex;
+  gap: 15px;
+  align-items: flex-end; /* Align button with input */
+  margin-bottom: 30px;
+}
+
+.tracking-form .form-group {
+  flex-grow: 1; /* Input takes remaining space */
+  margin-bottom: 0;
+}
+
+.tracking-form .btn {
+  height: 44px; /* Match input height (padding + border) */
+  flex-shrink: 0; /* Prevent button from shrinking */
+}
+
+.status-display {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.status-display h3 {
+  font-family: var(--font-body);
+  font-weight: bold;
+  color: var(--text-color);
+  font-size: 1.3em;
+}
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px 0;
+  position: relative;
+  /* Line behind steps */
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: #eee;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  color: #ccc;
+  font-size: 0.9em;
+  font-weight: bold;
+  position: relative;
+  z-index: 2;
+  
+  /* Circle */
+  &:before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 auto 10px auto;
+    border: 3px solid var(--background-color);
+  }
+}
+
+.step.active {
+  color: var(--palette-pistachio);
+  &:before {
+    background-color: var(--palette-pistachio);
+  }
+}
+
+.step.current {
+   /* Highlight the current step */
+  color: var(--palette-mint);
+  &:before {
+    background-color: var(--palette-mint);
+    border-color: #fff;
+    transform: scale(1.2); /* Make current step circle larger */
+  }
+}
+
+.status-text {
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: var(--border-radius-soft);
+}
+
+.status-text.pending { color: #8a6d3b; background-color: #fcf8e3; border: 1px solid #faebcc; }
+.status-text.preparing { color: var(--palette-mint); background-color: #e0f2f1; border: 1px solid var(--palette-mint); }
+.status-text.delivering { color: var(--palette-mango); background-color: #fff3e0; border: 1px solid var(--palette-mango); }
+.status-text.completed { color: var(--palette-pistachio); background-color: #e8f5e9; border: 1px solid var(--palette-pistachio); }
+.status-text.cancelled { color: #a94442; background-color: #f2dede; border: 1px solid #ebccd1; }
+
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border: 1px solid #ebccd1;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  text-align: center;
+}

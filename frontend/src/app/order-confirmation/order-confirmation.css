@@ -1,0 +1,33 @@
+.confirmation-container {
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.card {
+  padding: 30px 40px;
+  border-top: 6px solid var(--palette-pistachio); /* Green accent for success */
+}
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 20px;
+  opacity: 0.8;
+}
+
+h2 {
+  color: var(--palette-pistachio); /* Green heading */
+  font-size: 2.2em;
+}
+
+.lead-text {
+  font-size: 1.2em;
+  color: var(--text-color);
+  margin-bottom: 20px;
+}
+
+.next-steps {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 30px;
+}

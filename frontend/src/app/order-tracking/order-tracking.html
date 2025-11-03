@@ -1,0 +1,47 @@
+<div class="tracking-container grid-container">
+  <div class="card">
+    <h2>Track Your Order</h2>
+    <p class="subtitle text-center">Enter your order ID below to see its current status.</p>
+    
+    <form (ngSubmit)="trackOrder()" class="tracking-form">
+      <div class="form-group">
+        <label for="orderId">Order ID</label>
+        <input type="text" id="orderId" [(ngModel)]="orderId" name="orderId" placeholder="Enter your order ID">
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="isLoading || !orderId">
+        {{ isLoading ? 'Tracking...' : 'Track' }}
+      </button>
+    </form>
+
+    <div *ngIf="orderStatus && !errorMessage" class="status-display">
+      <h3>Status for Order #{{ foundOrderId }}</h3>
+      
+      <div class="progress-bar">
+        <div class="step" [class.active]="orderStatus === 'Pending' || orderStatus === 'Preparing' || orderStatus === 'Delivering' || orderStatus === 'Completed'" [class.current]="orderStatus === 'Pending'">
+          Pending
+        </div>
+        <div class="step" [class.active]="orderStatus === 'Preparing' || orderStatus === 'Delivering' || orderStatus === 'Completed'" [class.current]="orderStatus === 'Preparing'">
+          Preparing
+        </div>
+        <div class="step" [class.active]="orderStatus === 'Delivering' || orderStatus === 'Completed'" [class.current]="orderStatus === 'Delivering'">
+          Delivering
+        </div>
+        <div class="step" [class.active]="orderStatus === 'Completed'" [class.current]="orderStatus === 'Completed'">
+          Completed
+        </div>
+      </div>
+
+      <p class="status-text" [ngClass]="orderStatus.toLowerCase()">
+        {{ statusMessage }}
+      </p>
+
+      <p *ngIf="orderStatus === 'Cancelled'" class="status-text cancelled">
+        {{ statusMessage }}
+      </p>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+  </div>
+</div>
