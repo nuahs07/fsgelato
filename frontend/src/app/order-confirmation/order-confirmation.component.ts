@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router'; // Import RouterModule for routerLink
+import { RouterModule, ActivatedRoute } from '@angular/router'; // Import ActivatedRoute for query params
 
 @Component({
   selector: 'app-order-confirmation',
@@ -10,10 +10,15 @@ import { RouterModule } from '@angular/router'; // Import RouterModule for route
   styleUrls: ['./order-confirmation.component.css']
 })
 export class OrderConfirmationComponent implements OnInit {
-  mockOrderId: string = '';
+  orderTrackingNumber: string = '';
+
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    // Generate a mock order ID for demonstration
-    this.mockOrderId = Math.floor(100000 + Math.random() * 900000).toString();
+    // Get tracking number from query params
+    this.route.queryParams.subscribe(params => {
+      this.orderTrackingNumber = params['trackingNumber'] || 
+        Math.floor(100000 + Math.random() * 900000).toString();
+    });
   }
 }

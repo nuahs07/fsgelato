@@ -17,6 +17,10 @@ spring:
             implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
             physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
          ddl-auto: update
+   sql: 
+      init: 
+         mode: always
+         data-locations: classpath:data.sql
    servlet: 
       multipart: 
          enabled: true

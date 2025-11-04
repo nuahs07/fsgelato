@@ -113,37 +113,21 @@ export class CheckoutComponent implements OnInit {
       paymentMethod: this.paymentMethod,
     };
 
-    console.log('Simulating order submission with:', orderData);
+    console.log('Submitting order to backend:', orderData);
 
-    // FIX 2: Replace the real HTTP call with a simulated one for frontend testing.
-    setTimeout(() => {
-        console.log('Order simulation successful!');
-        
-        this.isSubmitting = false;
-        this.submitSuccess = true;
-        
-        // Clear the cart (from CartService)
-        this.cartService.clearCart();
-        
-        // Reset the form (use 'checkoutForm')
-        this.checkoutForm.reset();
-        
-        // Navigate to the confirmation page
-        this.router.navigate(['/order-confirmation']);
-
-    }, 1500); // Simulate a 1.5 second delay
-
-
-    /* // This is the backend code we will use LATER:
-    this.http.post('/api/orders', orderData) // Replace with your actual API endpoint
+    // Call the real backend API
+    this.http.post<{orderTrackingNumber: string}>('http://localhost:8080/api/checkout/purchase', orderData)
       .subscribe({
           next: (response) => {
-              console.log('Order successful:', response);
+              console.log('Order successful! Tracking number:', response.orderTrackingNumber);
               this.isSubmitting = false;
               this.submitSuccess = true;
               this.cartService.clearCart();
-              // Optional: Redirect to a confirmation page after a delay
-              setTimeout(() => this.router.navigate(['/order-confirmation']), 3000);
+              this.checkoutForm.reset();
+              // Navigate to confirmation page with tracking number
+              this.router.navigate(['/order-confirmation'], { 
+                queryParams: { trackingNumber: response.orderTrackingNumber } 
+              });
           },
           error: (err) => {
               console.error('Order failed:', err);
@@ -151,7 +135,6 @@ export class CheckoutComponent implements OnInit {
               this.submitError = 'Could not place order. Please check your details or try again later.';
           }
       });
-    */
   }
 
   // Helper getters for template validation
