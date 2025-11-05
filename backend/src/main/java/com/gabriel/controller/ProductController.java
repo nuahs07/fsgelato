@@ -4,16 +4,12 @@ import com.gabriel.model.Product;
 import com.gabriel.model.ProductCategory;
 import com.gabriel.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -26,7 +22,6 @@ public class ProductController {
     @RequestMapping("/api/product")
     public ResponseEntity<?>  getProductCategories()
     {
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             List<ProductCategory> mappedProducts = productService.listProductCategories();
@@ -45,7 +40,6 @@ public class ProductController {
     @PutMapping("/api/product")
     public ResponseEntity<?> add(@RequestBody Product product){
         log.info("Input >> " + product.toString() );
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             Product newProduct = productService.create(product);
@@ -62,11 +56,10 @@ public class ProductController {
     @PostMapping("/api/product")
     public ResponseEntity<?> update(@RequestBody Product product){
         log.info("Update Input >> product.toString() ");
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
-            Product newProduct = productService.update(product);
-            response = ResponseEntity.ok(product);
+            Product updatedProduct = productService.update(product);
+            response = ResponseEntity.ok(updatedProduct);
         }
         catch( Exception ex)
         {
@@ -79,7 +72,6 @@ public class ProductController {
     @GetMapping("/api/product/{id}")
     public ResponseEntity<?> get(@PathVariable final Integer id){
         log.info("Input product id >> " + Integer.toString(id));
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             Product product = productService.get(id);
@@ -94,7 +86,6 @@ public class ProductController {
     @DeleteMapping("/api/product/{id}")
     public ResponseEntity<?> delete(@PathVariable final Integer id){
         log.info("Input >> " + Integer.toString(id));
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             productService.delete(id);

@@ -65,11 +65,12 @@ public class CheckoutServiceImpl implements CheckoutService {
                 if (pi.getProductId() != null) {
                     Optional<Product> p = productRepository.findById(pi.getProductId());
                     if (p.isPresent()) {
-                        unitPrice = p.get().getPrice();
-                        if (p.get().getUnitsInStock() != null) {
-                            int left = Math.max(0, p.get().getUnitsInStock() - qty);
-                            p.get().setUnitsInStock(left);
-                            productRepository.save(p.get());
+                        Product product = p.get();
+                        unitPrice = product.getPrice();
+                        if (product.getUnitsInStock() != null) {
+                            int left = Math.max(0, product.getUnitsInStock() - qty);
+                            product.setUnitsInStock(left);
+                            productRepository.save(product);
                         }
                     }
                 }

@@ -41,6 +41,9 @@ public class MenuServiceImpl implements MenuService {
     public Menu create(Menu menu) {
         log.info(" add:Input " + menu.toString());
         MenuData menuData = transformMenu.transform(menu);
+        if (menuData == null) {
+            throw new IllegalArgumentException("Failed to transform menu to MenuData");
+        }
 
         MenuData newMenuData = menuDataRepository.save(menuData);
 

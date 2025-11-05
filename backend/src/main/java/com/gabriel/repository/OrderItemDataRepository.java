@@ -1,8 +1,6 @@
 package com.gabriel.repository;
 
 import com.gabriel.entity.OrderItemData;
-import com.gabriel.enums.OrderItemStatus;
-import com.gabriel.model.OrderItem;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

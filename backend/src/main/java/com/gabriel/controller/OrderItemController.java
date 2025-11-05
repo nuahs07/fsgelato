@@ -4,7 +4,6 @@ import com.gabriel.model.OrderItem;
 import com.gabriel.service.OrderItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,6 @@ public class OrderItemController {
     public ResponseEntity<?> getAll()
     {
         log.error("Failed to retrieve orderitem");
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             List<OrderItem> orderItems = orderItemService.getAll();
@@ -41,7 +39,6 @@ public class OrderItemController {
     @RequestMapping("/api/orderitem/{customerId}")
     public ResponseEntity<?> getOrderItems(@PathVariable final Integer customerId, @RequestParam (name="status") Integer status)
     {
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             if(status == 0) {
@@ -64,7 +61,6 @@ public class OrderItemController {
     @PutMapping("/api/orderitem")
     public ResponseEntity<?> add(@RequestBody OrderItem orderItem){
         log.info("Input >> " + orderItem.toString() );
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             OrderItem  neworderItem = orderItemService.create(orderItem);
@@ -82,7 +78,6 @@ public class OrderItemController {
     @PutMapping("/api/orderitems")
     public ResponseEntity<?> add(@RequestBody List<OrderItem> orderItems){
         log.info("Input >> " + orderItems.toString() );
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             List<OrderItem> neworderItems = orderItemService.create(orderItems);
@@ -100,7 +95,6 @@ public class OrderItemController {
     @PostMapping("/api/orderitem")
     public ResponseEntity<?> update(@RequestBody OrderItem orderItem){
         log.info("Update Input >> orderItem.toString() ");
-        HttpHeaders headers = new HttpHeaders();
         ResponseEntity<?> response;
         try {
             OrderItem newOrderItem =orderItemService.update(orderItem);

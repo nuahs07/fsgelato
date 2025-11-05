@@ -99,14 +99,19 @@ public class ProductServiceImpl implements ProductService {
         }
     @Override
     public Product get(Integer id) {
+        if (id == null) {
+            log.error(" Input id is null");
+            return null;
+        }
         log.info(" Input id >> "+  Integer.toString(id) );
         Product product = null;
         Optional<ProductData> optional = productDataRepository.findById(id);
         if(optional.isPresent()) {
             log.info(" Is present >> ");
+            ProductData productData = optional.get();
             product = new Product();
-            product.setId(optional.get().getId());
-            product.setName(optional.get().getName());
+            product.setId(productData.getId());
+            product.setName(productData.getName());
         }
         else {
             log.info(" Failed >> unable to locate id: " +  Integer.toString(id)  );
@@ -117,6 +122,9 @@ public class ProductServiceImpl implements ProductService {
         public Product create(Product product) {
             log.info(" add:Input " + product.toString());
             ProductData productData = transformProduct.transform(product);
+            if (productData == null) {
+                throw new IllegalArgumentException("Failed to transform product to ProductData");
+            }
             ProductData updatedProductData = productDataRepository.save(productData);
             log.info(" add:Input {}", productData.toString());
             return  transformProductData.transform(updatedProductData);
@@ -127,6 +135,9 @@ public class ProductServiceImpl implements ProductService {
             Optional<ProductData> optional  = productDataRepository.findById(product.getId());
             if(optional.isPresent()){
                 ProductData productData = transformProduct.transform(product);
+                if (productData == null) {
+                    throw new IllegalArgumentException("Failed to transform product to ProductData");
+                }
                 ProductData updaatedProductData = productDataRepository.save( productData);
                 return transformProductData.transform(updaatedProductData);
             }
@@ -137,11 +148,15 @@ public class ProductServiceImpl implements ProductService {
         }
     @Override
     public void delete(Integer id) {
+        if (id == null) {
+            log.error(" Input id is null");
+            return;
+        }
         log.info(" Input >> {}",id);
         Optional<ProductData> optional = productDataRepository.findById(id);
         if( optional.isPresent()) {
             ProductData productDatum = optional.get();
-            productDataRepository.delete(optional.get());
+            productDataRepository.delete(productDatum);
             log.info(" Successfully deleted Product record with id: {}",id);
         }
         else {

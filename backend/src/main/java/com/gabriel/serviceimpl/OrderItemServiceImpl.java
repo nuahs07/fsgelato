@@ -89,6 +89,9 @@ public class OrderItemServiceImpl implements OrderItemService {
         log.info(" add:Input {}", orderItem.toString());
 
         OrderItemData orderItemData = transformOrderItem.transform(orderItem);
+        if (orderItemData == null) {
+            throw new IllegalArgumentException("Failed to transform orderItem to OrderItemData");
+        }
         OrderItemData updatedOrderItemData = orderItemDataRepository.save(orderItemData);
         log.info(" add:Input {}", updatedOrderItemData.toString());
 
@@ -100,9 +103,13 @@ public class OrderItemServiceImpl implements OrderItemService {
         List <OrderItem> retOrderItems = new ArrayList<>();
         for (OrderItem orderItem: orderItems){
             OrderItemData orderItemDatun = transformOrderItem.transform(orderItem);
-            OrderItemData orderItemDatum = orderItemDataRepository.save(orderItemDatun);
-            OrderItem newOrderItem = transformOrderItemData.transform(orderItemDatum );
-            retOrderItems.add(newOrderItem);
+            if (orderItemDatun != null) {
+                OrderItemData orderItemDatum = orderItemDataRepository.save(orderItemDatun);
+                OrderItem newOrderItem = transformOrderItemData.transform(orderItemDatum);
+                if (newOrderItem != null) {
+                    retOrderItems.add(newOrderItem);
+                }
+            }
         }
         return retOrderItems;
     }
@@ -115,6 +122,9 @@ public class OrderItemServiceImpl implements OrderItemService {
         Optional<OrderItemData> optional  = orderItemDataRepository.findById(orderItem.getId());
         if(optional.isPresent()) {
             OrderItemData orderItemData = transformOrderItem.transform(orderItem);
+            if (orderItemData == null) {
+                throw new IllegalArgumentException("Failed to transform orderItem to OrderItemData");
+            }
             OrderItemData createdOrderItemData = orderItemDataRepository.save(orderItemData);
             log.info(" update:Output {}", orderItemData.toString());
             return transformOrderItemData.transform(createdOrderItemData);
@@ -130,25 +140,32 @@ public class OrderItemServiceImpl implements OrderItemService {
         List <OrderItem> retOrderItems = new ArrayList<>();
         for (OrderItem orderItem: orderItems){
             OrderItemData orderItemDatun = transformOrderItem.transform(orderItem);
-            OrderItemData orderItemDatum = orderItemDataRepository.save(orderItemDatun);
-            OrderItem newOrderItem = transformOrderItemData.transform(orderItemDatum );
-            retOrderItems.add(newOrderItem);
+            if (orderItemDatun != null) {
+                OrderItemData orderItemDatum = orderItemDataRepository.save(orderItemDatun);
+                OrderItem newOrderItem = transformOrderItemData.transform(orderItemDatum);
+                if (newOrderItem != null) {
+                    retOrderItems.add(newOrderItem);
+                }
+            }
         }
         return retOrderItems;
     }
 
     @Override
     public List<OrderItem> updateStatus(List<Integer> ids, OrderItemStatus orderItemStatus) {
-        List<OrderItemData> orderItemDats = new ArrayList<>();
         List<OrderItem> updatedOrderItems = new ArrayList<>();
         for(Integer id : ids  ) {
-            Optional<OrderItemData> optional = orderItemDataRepository.findById(id);
-            if (optional.isPresent()) {
-                OrderItemData orderItemDatum = optional.get();
-                orderItemDatum.setStatus(orderItemStatus);
-                orderItemDatum = orderItemDataRepository.save(orderItemDatum);
-                OrderItem updatedOrderItem = transformOrderItemData.transform(orderItemDatum);
-                updatedOrderItems.add(updatedOrderItem);
+            if (id != null) {
+                Optional<OrderItemData> optional = orderItemDataRepository.findById(id);
+                if (optional.isPresent()) {
+                    OrderItemData orderItemDatum = optional.get();
+                    orderItemDatum.setStatus(orderItemStatus);
+                    orderItemDatum = orderItemDataRepository.save(orderItemDatum);
+                    OrderItem updatedOrderItem = transformOrderItemData.transform(orderItemDatum);
+                    if (updatedOrderItem != null) {
+                        updatedOrderItems.add(updatedOrderItem);
+                    }
+                }
             }
         }
         return updatedOrderItems;
@@ -156,12 +173,16 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public OrderItem get(Integer id){
-    log.info(" Input id >> "+  Integer.toString(id) );
+        if (id == null) {
+            log.error(" Input id is null");
+            return null;
+        }
+        log.info(" Input id >> "+  Integer.toString(id) );
         Optional<OrderItemData> optional = orderItemDataRepository.findById(id);
         if(optional.isPresent()) {
             log.info(" Is present >> ");
             OrderItemData orderItemDatum = optional.get();
-            return  transformOrderItemData.transform(orderItemDatum);
+            return transformOrderItemData.transform(orderItemDatum);
         }
         log.info(" Failed >> unable to locate id: " +  Integer.toString(id)  );
         return null;
@@ -169,6 +190,10 @@ public class OrderItemServiceImpl implements OrderItemService {
 
     @Override
     public void delete (Integer id){
+        if (id == null) {
+            log.error(" Input id is null");
+            return;
+        }
         Optional<OrderItemData> optional = orderItemDataRepository.findById(id);
         if( optional.isPresent()) {
             OrderItemData orderItemDatum = optional.get();
