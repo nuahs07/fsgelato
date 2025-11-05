@@ -1,4 +1,3 @@
-// src/src/main.ts
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http'; // Import if needed globally
 import { provideRouter } from '@angular/router'; // Import if using routing
