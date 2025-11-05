@@ -1,4 +1,3 @@
-com\gabriel\entity\AppDetailData.class
 com\gabriel\service\CustomerService.class
 com\gabriel\controller\FlavorController.class
 com\gabriel\controller\MenuController.class
@@ -14,7 +13,6 @@ com\gabriel\repository\CustomerRepository.class
 com\gabriel\model\ProductCategory.class
 com\gabriel\service\MenuService.class
 com\gabriel\model\AppDetail.class
-com\gabriel\entity\AppDetailsData.class
 com\gabriel\controller\OrderController.class
 com\gabriel\dto\PurchaseItem.class
 com\gabriel\service\CheckoutService.class
@@ -35,7 +33,6 @@ com\gabriel\repository\MenuDataRepository.class
 com\gabriel\serviceimpl\MenuServiceImpl.class
 com\gabriel\controller\CheckoutController.class
 com\gabriel\controller\OrderItemController.class
-com\gabriel\entity\CustomerData.class
 com\gabriel\repository\ProductDataRepository.class
 com\gabriel\entity\OrderItemData.class
 com\gabriel\serviceimpl\ProductServiceImpl.class

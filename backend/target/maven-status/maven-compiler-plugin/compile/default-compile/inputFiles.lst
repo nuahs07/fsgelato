@@ -21,7 +21,6 @@ C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\config\RestConfig.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\repository\ProductDataRepository.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\serviceimpl\CheckoutServiceImpl.java
-C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\entity\CustomerData.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\model\Customer.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\repository\CustomerRepository.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\controller\CategoryController.java
@@ -41,7 +40,6 @@ C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\controller\AppDetailsController.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\serviceimpl\ProductServiceImpl.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\dto\PurchaseItem.java
-C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\entity\AppDetailData.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\model\Order.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\entity\OrderItem.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\repository\MenuDataRepository.java
@@ -51,5 +49,4 @@ C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\model\Menu.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\repository\OrderRepository.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\repository\ProductCategoryRepository.java
-C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\entity\AppDetailsData.java
 C:\Users\Shaun\Documents\Activities\3RD YEAR\ITS181-2\exercise\fsgelato\backend\src\main\java\com\gabriel\entity\Order.java
