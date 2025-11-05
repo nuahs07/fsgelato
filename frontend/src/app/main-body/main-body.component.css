@@ -5,7 +5,8 @@ main {
 }
 
 .hero {
-  /*background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/images/bg_fsgelato.png'); /* Add a background image */
+  /*background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('assets/images/bg_fsgelato.png');*/
+
   background-size: cover;
   background-position: center;
   color: var(--text-color-light);

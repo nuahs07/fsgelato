@@ -1,7 +1,6 @@
 package com.gabriel.controller;
 
 import com.gabriel.model.Menu;
-import com.gabriel.model.Menu;
 import com.gabriel.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

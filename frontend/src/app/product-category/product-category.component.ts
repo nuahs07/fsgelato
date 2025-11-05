@@ -42,7 +42,7 @@ export class ProductCategoryComponent implements OnInit { // Changed class name 
       { id: 4, name: "Mango Tango Sorbet", description: "Refreshing tropical mango.", price: 140, imageUrl: "assets/products/mango.jpg", category: "Sorbet", isSeasonal: false, isDairyFree: true },
       { id: 5, name: "Mint Choc Chip", description: "Cool mint with dark chocolate flakes.", price: 155, imageUrl: "assets/products/mintchip.jpg", category: "Dairy", isSeasonal: false, isDairyFree: false },
       { id: 6, name: "Pumpkin Spice Delight", description: "Autumn favorite with warm spices.", price: 165, imageUrl: "assets/products/pumpkin.jpg", category: "Dairy", isSeasonal: true, isDairyFree: false },
-       { id: 7, name: "Vegan Pistachio", description: "Creamy pistachio, dairy-free.", price: 170, imageUrl: "assets/products/pistachio_vegan.jpg", category: "Vegan", isSeasonal: false, isDairyFree: true },
+       { id: 7, name: "Vegan Pistachio", description: "Creamy pistachio, dairy-free.", price: 170, imageUrl: "assets/products/pistacho.jpg", category: "Vegan", isSeasonal: false, isDairyFree: true },
     ];
      // Simulate loading delay (optional)
      setTimeout(() => {

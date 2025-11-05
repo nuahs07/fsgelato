@@ -6,7 +6,7 @@
 
       <div class="cart-items">
         <div *ngFor="let item of items" class="cart-item card">
-          <img [src]="item.imageUrl || 'assets/images/placeholder-gelato.png'" [alt]="item.name" class="item-image">
+          <img [src]="item.imageUrl" [alt]="item.name" class="item-image" onerror="this.src='assets/images/icon-flavors.png'">
           <div class="item-details">
             <h3>{{ item.name }}</h3>
             <p>Price: {{ item.price | currency:'PHP':'symbol':'1.2-2' }}</p>

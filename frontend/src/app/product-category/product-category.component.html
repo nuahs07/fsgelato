@@ -14,7 +14,7 @@
 
   <div *ngIf="!isLoading && !error" class="product-grid">
     <div *ngFor="let flavor of filteredFlavors" class="card product-card">
-      <img [src]="flavor.imageUrl || 'assets/images/placeholder-gelato.png'" [alt]="flavor.name">
+      <img [src]="flavor.imageUrl" [alt]="flavor.name" onerror="this.src='assets/images/icon-flavors.png'">
       <h3>{{ flavor.name }}</h3>
       <p class="description">{{ flavor.description }}</p>
       <div class="tags">

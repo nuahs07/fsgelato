@@ -76,7 +76,7 @@ public class ProductController {
         return response;
     }
 
-    @GetMapping("api/product/{id}")
+    @GetMapping("/api/product/{id}")
     public ResponseEntity<?> get(@PathVariable final Integer id){
         log.info("Input product id >> " + Integer.toString(id));
         HttpHeaders headers = new HttpHeaders();
